@@ -1,6 +1,7 @@
 # RraFFic Light Controller using Verilog
 The purpose of this project is to design a methodology using Verilog to control the traffic with specified time delays for a T-Shaped road.*
-#Table of Contents
+
+## Table of Contents
  1. Introduction
  2. Methodology
       Directiond Considered
@@ -15,7 +16,7 @@ The purpose of this project is to design a methodology using Verilog to control 
 8. References
 9. Author
 
-    #Introduction
+    # Introduction
    Traffic control is a challenging problem in many cities. This is due to the large number of vehicles and the high dynamics of the traffic system. Poor traffic systems are the big reason for accidents, time losses. In this method of approach, it will reduce the waiting time of the vehicles at traffic signals. The hardware design has been developed using Verilog Hardware Description Language (HDL) programming.
 
 Verilog designing is hardware descriptive language, the name itself suggest that it deals with the hardware designing and simulation. Basically, it becomes very difficult to mount the various electronic components on breadboard or PCB circuit. It also takes too much time for the simulation and sometimes many errors occur because of improper connection of components onto the circuit. And thus, to overcome this factor hardware descriptive language comes into conclusion. we can code the process using Verilog and we can mount it on a circuit or just upload it to the circuit accordingly so that particular circuit will work as according to the code we have written.
@@ -52,9 +53,38 @@ Easy to write.
 Easy to understand as it similar to C program.
 Easier to learn compared with VHDL.
 
-#Methodology
-  Direction Considerd
+# Methodology
+ ## Direction Considerd
   
   ![Derection](https://github.com/user-attachments/assets/eae92e52-bb87-432f-9c6a-1322ee507636)
+  The directions, M1, MT, M2, S, that is been considered for analysis of our problem is shown in the figure. And, the problem statement is explained in the figure. Six states, S1, S2, S3, S4, S5, S6 are taken into consideration and state diagram, state table is made using the following logic explained in the figure.
+
+## Problem Statement
+![WhatsApp Image 2025-07-19 at 21 08 36_49874f64](https://github.com/user-attachments/assets/56a359cc-6022-4d73-ac8d-832fce6367ca)
+Green light indicates that there is no traffic and there is easy flow of vehicles in that route/direction.
+Red light indicates that there is a traffic jam and that route is blocked for the vehicles to move and,
+Yellow light indicates that the route has medium flow of vehicles.
+Time delays for changing from one state to another is considered as, TMG(from S1 to S2), TY(from S2 to S3), TTG(from S3 to S4), TY(from S4 to S5), TSG(from S5 to S6) and TY(from S6 to S1) and the cycle continues.
+
+## State Diagram
+![WhatsApp Image 2025-07-19 at 21 10 34_9f456001](https://github.com/user-attachments/assets/74530e8e-3161-4f7f-9427-7bdbadf7bed9)
+In Figure, The time delays are considered as follows :
+
+TMG = 7 seconds
+TY = 2 seconds
+TTG = 5 seconds
+TSG = 3 seconds
+Until TMG seconds, the signal will remain in S1 state, and after TMG seconds, it will move to S2 state. Until TY seconds it will remain in S2 state and after TY seconds, it will move to S3 state, and so on. After TY seconds, in state S6, it will go back to S1 state and the cycle continues.
+
+![WhatsApp Image 2025-07-19 at 21 10 38_0d7f8c57](https://github.com/user-attachments/assets/f7878da9-0c32-44f9-8102-ed71d1112ec8)
+In Figure,
+
+R = RED,
+Y = YELLOW and,
+G = GREEN.
+ST = State Transition; A, B and C are considered as the present state. The state table is made, considering the Logic diagram/problem statement given in Figure. From the Figure it is understood that,
+
+In state S1(001);
+
 
   
