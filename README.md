@@ -76,6 +76,7 @@ TTG = 5 seconds
 TSG = 3 seconds
 Until TMG seconds, the signal will remain in S1 state, and after TMG seconds, it will move to S2 state. Until TY seconds it will remain in S2 state and after TY seconds, it will move to S3 state, and so on. After TY seconds, in state S6, it will go back to S1 state and the cycle continues.
 
+## State Table
 ![WhatsApp Image 2025-07-19 at 21 10 38_0d7f8c57](https://github.com/user-attachments/assets/f7878da9-0c32-44f9-8102-ed71d1112ec8)
 In Figure,
 
