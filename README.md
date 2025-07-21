@@ -421,25 +421,6 @@ A lot of development ideas for work in future can be implemented, such as using 
 additional step for development and choosing the best road for the emergency and police vehicles. For national highways we can also design the 8 road traffic light controllers.
 
 
-## References
-
-1) Laboratory Exercise #12, The Traffic Light Controller Lab. “ECEN 248: Introduction to Digital Design”. Department of Electrical and Computer Engineering Texas A&M University.
-
-2) Rajeev Madhavan, Verilog HDL Reference Guide, Automata Publishing Company, CA, 1993. ISBN 0-9627488-4-6
-
-3) E. Sternheim, Rajvir Singh, Rajeev Madhavan, Yatin Trivedi, Digital Design and Synthesis with Verilog HDL, Automata Publishing Company, CA, 1993. ISBN 0-9627488-2-X
-
-4) https://intentswell.blogspot.com/2021/03/traffic-light-controller-project-report.html
-
-5) https://www.semanticscholar.org/paper/An-Advanced-Traffic-Light-Controller-using-Verilog-B.-ala/1ca8a8e50c2c8273a3ee1247a6057f8eb4f402ee
-
-6) https://www.academia.edu/21200096/DESIGN_AND_IMPLEMENTATION_OF_TRAFFIC_LIGHTS_CONTROLLER_USING_FPGA_A_Project_Based_Laboratory_Report_in_partial_fulfilment_for_the_award_of_III_IV_B_Tech_I_Semester_Submitted_by_Lab_Instructor
-
-7) https://vlsicoding.blogspot.com/2013/11/verilog-code-for-traffic-light-control.html 
-
-8) https://www.fpga4student.com/2016/11/verilog-code-for-traffic-light-system.html 
-
-9) https://www.slideshare.net/UtkarshDe/four-way-traffic-light-conrol-using-verilog 
 
 
     
