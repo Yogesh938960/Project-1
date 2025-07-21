@@ -24,19 +24,19 @@ Traffic Light Controller Placement in Spartan6 FPGA Development Kit
 
 
 ## VHDL Code for Traffic Light Controller
-library IEEE;
+    library IEEE;
 
-use IEEE.STD_LOGIC_1164.ALL;
+    use IEEE.STD_LOGIC_1164.ALL;
 
-use IEEE.STD_LOGIC_ARITH.ALL;
+    use IEEE.STD_LOGIC_ARITH.ALL;
 
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+    use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
  
 
-entity traffic_light is
+    entity traffic_light is
 
-port ( clk : in std_logic;
+    port ( clk : in std_logic;
 
        rst : in std_logic;
 
@@ -64,401 +64,403 @@ port ( clk : in std_logic;
 
                westyel    : out std_logic);
 
-end traffic_light;
+    end traffic_light;
 
  
 
-architecture Behavioral of traffic_light is
+    architecture Behavioral of traffic_light is
 
-type contol is (north,south,east,west);
+    type contol is (north,south,east,west);
 
-signal control,control1 : contol := north;
+    signal control,control1 : contol := north;
 
-begin
+    begin
 
-process(clk,rst)
+    process(clk,rst)
 
-variable i : integer := 0;
+    variable i : integer := 0;
 
-begin
+    begin
 
-if rst = '1' then
+    if rst = '1' then
 
-if clk'event and clk = '1' then
+    if clk'event and clk = '1' then
 
-if i < 1500000000 then
+    if i < 1500000000 then
 
-i := i + 1;
+    i := i + 1;
 
-elsif i = 1500000000 then
+    elsif i = 1500000000 then
 
-control <= control1;
+    control <= control1;
 
-i := 0;
+    i := 0;
 
-end if;
+    end if;
 
-if control = north then
+    if control = north then
 
-if i >= 0 and i <= 750000000 then
+    if i >= 0 and i <= 750000000 then
 
-northgreen <= '1';
+    northgreen <= '1';
 
-northred   <= '0';
+    northred   <= '0';
 
-northyel   <= '0';
+    northyel   <= '0';
 
-southgreen <= '0';
+    southgreen <= '0';
 
-southred   <= '1';
+    southred   <= '1';
 
-southyel   <= '0';
+    southyel   <= '0';
 
-eastgreen  <= '0';
+    eastgreen  <= '0';
 
-eastred    <= '1';
+    eastred    <= '1';
 
-eastyel    <= '0';
+    eastyel    <= '0';
 
-westred    <= '1';
+    westred    <= '1';
 
-westgreen  <= '0';
+    westgreen  <= '0';
 
-westyel    <= '0'; 
+    westyel    <= '0'; 
 
-elsif i > 750000000 and i <= 1000000000 then
+    elsif i > 750000000 and i <= 1000000000 then
 
-northgreen <= '0';
+    northgreen <= '0';
 
-northred   <= '0';
+    northred   <= '0';
 
-northyel   <= '1';
+    northyel   <= '1';
+ 
+    southgreen <= '0';
 
-southgreen <= '0';
+    southred   <= '1';
 
-southred   <= '1';
+    southyel   <= '0';
 
-southyel   <= '0';
+    eastgreen  <= '0';
 
-eastgreen  <= '0';
+    eastred    <= '1';
 
-eastred    <= '1';
+    eastyel    <= '0';
 
-eastyel    <= '0';
+    westred    <= '1';
 
-westred    <= '1';
+    westgreen  <= '0';
 
-westgreen  <= '0';
+    westyel    <= '0'; 
 
-westyel    <= '0'; 
+    elsif i > 1000000000 and i < 1500000000 then
 
-elsif i > 1000000000 and i < 1500000000 then
+    northgreen <= '0';
 
-northgreen <= '0';
+    northred   <= '1';
 
-northred   <= '1';
+    northyel   <= '0';
 
-northyel   <= '0';
+    southgreen <= '0';
 
-southgreen <= '0';
+    southred   <= '1';
 
-southred   <= '1';
+    southyel   <= '0';
 
-southyel   <= '0';
+    eastgreen  <= '1';
 
-eastgreen  <= '1';
+    eastred    <= '0';
 
-eastred    <= '0';
+    eastyel    <= '0';
 
-eastyel    <= '0';
+    westred    <= '1';
+   
+    westgreen  <= '0';
 
-westred    <= '1';
-
-westgreen  <= '0';
-
-westyel    <= '0'; 
+    westyel    <= '0'; 
 
  
 
-control1 <= east;
+    control1 <= east;
+  
+    end if;
 
-end if;
-
-elsif control = east then
-
- 
-
-if i >= 0 and i <= 750000000 then
-
-northgreen <= '0';
-
-northred   <= '1';
-
-northyel   <= '0';
-
-southgreen <= '0';
-
-southred   <= '1';
-
-southyel   <= '0';
-
-eastgreen  <= '1';
-
-eastred    <= '0';
-
-eastyel    <= '0';
-
-westred    <= '1';
-
-westgreen  <= '0';
-
-westyel    <= '0'; 
-
-elsif i > 750000000 and i <= 1000000000 then
-
-northgreen <= '0';
-
-northred   <= '1';
-
-northyel   <= '0';
-
-southgreen <= '0';
-
-southred   <= '1';
-
-southyel   <= '0';
-
-eastgreen  <= '0';
-
-eastred    <= '0';
-
-eastyel    <= '1';
-
-westred    <= '1';
-
-westgreen  <= '0';
-
-westyel    <= '0'; 
-
-elsif i > 1000000000 and i < 1500000000 then
-
-northgreen <= '0';
-
-northred   <= '1';
-
-northyel   <= '0';
-
-southgreen <= '1';
-
-southred   <= '0';
-
-southyel   <= '0';
-
-eastgreen  <= '0';
-
-eastred    <= '1';
-
-eastyel    <= '0';
-
-westred    <= '1';
-
-westgreen  <= '0';
-
-westyel    <= '0'; 
+    elsif control = east then
 
  
 
- 
+    if i >= 0 and i <= 750000000 then
 
-control1 <= south;
+    northgreen <= '0';
 
-end if;
+    northred   <= '1';
 
-elsif control = south then
+    northyel   <= '0';
 
-if i >= 0 and i <= 750000000 then
+    southgreen <= '0';
 
-northgreen <= '0';
+    southred   <= '1';
 
-northred   <= '1';
+    southyel   <= '0';
 
-northyel   <= '0';
+    eastgreen  <= '1';
 
-southgreen <= '1';
+    eastred    <= '0';
 
-southred   <= '0';
+    eastyel    <= '0';
 
-southyel   <= '0';
+    westred   <= '1';
 
-eastgreen  <= '0';
+    westgreen  <= '0';
 
-eastred    <= '1';
+    westyel    <= '0'; 
 
-eastyel    <= '0';
+    elsif i > 750000000 and i <= 1000000000 then
 
-westred    <= '1';
+    northgreen <= '0';
 
-westgreen  <= '0';
+    northred   <= '1';
 
-westyel    <= '0'; 
+    northyel   <= '0';
 
-elsif i > 750000000 and i <= 1000000000 then
+    southgreen <= '0';
 
-northgreen <= '0';
+    southred   <= '1';
 
-northred   <= '1';
+    southyel   <= '0';
 
-northyel   <= '0';
+    eastgreen  <= '0';
 
-southgreen <= '0';
+    eastred    <= '0';
 
-southred   <= '0';
+    eastyel    <= '1';
 
-southyel   <= '1';
+    westred    <= '1';
 
-eastgreen  <= '0';
+    westgreen  <= '0';
 
-eastred    <= '1';
+    westyel    <= '0'; 
 
-eastyel    <= '0';
+    elsif i > 1000000000 and i < 1500000000 then
 
-westred    <= '1';
+    northgreen <= '0';
 
-westgreen  <= '0';
+    northred   <= '1';
 
-westyel    <= '0'; 
+    northyel   <= '0';
 
-elsif i > 1000000000 and i < 1500000000 then
+    southgreen <= '1';
 
-northgreen <= '0';
+    southred   <= '0';
 
-northred   <= '1';
+    southyel   <= '0';
 
-northyel   <= '0';
+    eastgreen  <= '0';
 
-southgreen <= '0';
+    eastred    <= '1';
 
-southred   <= '1';
+    eastyel    <= '0';
 
-southyel   <= '0';
+    westred    <= '1';
 
-eastgreen  <= '0';
+    westgreen  <= '0';
 
-eastred    <= '1';
-
-eastyel    <= '0';
-
-westred    <= '0';
-
-westgreen  <= '1';
-
-westyel    <= '0'; 
-
- 
-
-control1 <= west;
-
-end if;
-
-elsif control = west then
-
- 
-
-if i >= 0 and i <= 750000000 then
-
-northgreen <= '0';
-
-northred   <= '1';
-
-northyel   <= '0';
-
-southgreen <= '0';
-
-southred   <= '1';
-
-southyel   <= '0';
-
-eastgreen  <= '0';
-
-eastred    <= '1';
-
-eastyel    <= '0';
-
-westred    <= '0';
-
-westgreen  <= '1';
-
-westyel    <= '0'; 
-
-elsif i > 750000000 and i <= 1000000000 then
-
-northgreen <= '0';
-
-northred   <= '1';
-
-northyel   <= '0';
-
-southgreen <= '0';
-
-southred   <= '1';
-
-southyel   <= '0';
-
-eastgreen  <= '0';
-
-eastred    <= '1';
-
-eastyel    <= '0';
-
-westred    <= '0';
-
-westgreen  <= '0';
-
-westyel    <= '1'; 
-
-elsif i > 1000000000 and i < 1500000000 then
-
-northgreen <= '1';
-
-northred   <= '0';
-
-northyel   <= '0';
-
-southgreen <= '0';
-
-southred   <= '1';
-
-southyel   <= '0';
-
-eastgreen  <= '0';
-
-eastred    <= '1';
-
-eastyel    <= '0';
-
-westred    <= '1';
-
-westgreen  <= '0';
-
-westyel    <= '0'; 
+    westyel    <= '0'; 
 
  
 
  
 
-control1 <= north;
+    control1 <= south;
 
-end if;
+    end if;
 
-end if;
+    elsif control = south then
 
-end if;
+    if i >= 0 and i <= 750000000 then
 
-end if;
+    northgreen <= '0';
 
-end process;
+    northred   <= '1';
 
-end Behavioral;
+    northyel   <= '0';
+
+    southgreen <= '1';
+
+    southred   <= '0';
+
+    southyel   <= '0';
+
+    eastgreen  <= '0';
+
+    eastred    <= '1';
+
+    eastyel    <= '0';
+
+    westred    <= '1';
+
+    westgreen  <= '0';
+
+    westyel    <= '0'; 
+
+    elsif i > 750000000 and i <= 1000000000 then
+
+    northgreen <= '0';
+
+    northred   <= '1';
+
+    northyel   <= '0';
+
+    southgreen <= '0';
+
+    southred   <= '0';
+
+    southyel   <= '1';
+
+    eastgreen  <= '0';
+
+    eastred    <= '1';
+
+    eastyel    <= '0';
+
+    westred    <= '1';
+
+    westgreen  <= '0';
+
+    westyel    <= '0'; 
+
+    elsif i > 1000000000 and i < 1500000000 then
+
+    northgreen <= '0';
+
+    northred   <= '1';
+
+    northyel   <= '0';
+
+    southgreen <= '0';
+
+    southred   <= '1';
+
+    southyel   <= '0';
+
+    eastgreen  <= '0';
+
+    eastred    <= '1';
+
+    eastyel    <= '0';
+
+    westred    <= '0';
+
+    westgreen  <= '1';
+
+    westyel    <= '0'; 
+
+ 
+
+    control1 <= west;
+
+    end if;
+
+    elsif control = west then
+
+ 
+
+    if i >= 0 and i <= 750000000 then
+
+    northgreen <= '0';
+
+    northred   <= '1';
+
+    northyel   <= '0';
+
+    southgreen <= '0';
+
+    southred   <= '1';
+
+    southyel   <= '0';
+
+    eastgreen  <= '0';
+
+    eastred    <= '1';
+
+    eastyel    <= '0';
+
+    westred    <= '0';
+
+    westgreen  <= '1';
+
+    westyel    <= '0'; 
+
+    elsif i > 750000000 and i <= 1000000000 then
+
+    northgreen <= '0';
+
+    northred   <= '1';
+
+    northyel   <= '0';
+
+    southgreen <= '0';
+
+    southred   <= '1';
+
+    southyel   <= '0';
+
+    eastgreen  <= '0';
+
+    eastred    <= '1';
+
+    eastyel    <= '0';
+
+    westred    <= '0';
+
+    westgreen  <= '0';
+
+    westyel    <= '1'; 
+
+    elsif i > 1000000000 and i < 1500000000 then
+
+    northgreen <= '1';
+
+    northred   <= '0';
+
+    northyel   <= '0';
+
+    southgreen <= '0';
+
+    southred   <= '1';
+
+    southyel   <= '0';
+
+    eastgreen  <= '0';
+
+    eastred    <= '1';
+
+    eastyel    <= '0';
+
+    westred    <= '1';
+
+    westgreen  <= '0';
+
+    westyel    <= '0'; 
+
+   
+
+ 
+
+    control1 <= north;
+
+    end if;
+
+    end if;
+
+    end if;
+
+    end if;
+
+    end process;
+ 
+    end Behavioral;
+
+    
 
 ## TESTBENCH
 
