@@ -1,0 +1,10 @@
+always @(posedge clk or posedge reset) begin
+  if (reset) state <= RED;
+  else case(state)
+    RED:     state <= (emergency) ? EMERGENCY_GREEN : GREEN;
+    GREEN:   state <= YELLOW;
+    YELLOW:  state <= RED;
+    EMERGENCY_GREEN: state <= (emergency) ? EMERGENCY_GREEN : RED;
+    default: state <= RED;
+  endcase
+end
