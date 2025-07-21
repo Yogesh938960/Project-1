@@ -120,3 +120,5 @@ Simulation ready: Testable in ModelSim or Vivado with standard HDL testbench met
 # 8. State Diagram
 <img width="1024" height="1024" alt="State_Diagram" src="https://github.com/user-attachments/assets/94d48d00-b194-47e6-943f-9028b47dcb44" />
 
+# 9. Simulation Result
+[Simulation Results .pdf](https://github.com/user-attachments/files/21343772/Simulation.Results.pdf)
