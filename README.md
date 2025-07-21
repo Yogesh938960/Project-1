@@ -442,10 +442,6 @@ additional step for development and choosing the best road for the emergency and
 9) https://www.slideshare.net/UtkarshDe/four-way-traffic-light-conrol-using-verilog 
 
 
-## Author
-
-- [A Devipriya](https://github.com/Devipriya1921), Bachelor of Engineering in Electronics and Communication Engineering, Cambridge Institute of Technology, Bangalore
-
     
 
 
