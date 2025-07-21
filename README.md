@@ -101,3 +101,19 @@ HDL design: FSM-based traffic light logic, coded in Verilog/VHDL.
 FPGA implementation: Deployable on common educational/hobbyist FPGAs like Xilinx Spartan.
 
 Simulation ready: Testable in ModelSim or Vivado with standard HDL testbench methodology.
+
+
+
+# 5. State Table
+
+
+
+# 6. State Direction & Direction Asssignment 
+
+
+
+# 7. State Diagram
+
+
+
+
