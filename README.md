@@ -3,499 +3,101 @@
 
 # Table of Contents
 
-1. [Introduction](#Introduction)
-2. [VHDL Code for Traffic Light Controller](#VHDLCodeforTrafficLightController)
+1. [Overview](Overview)
+# Overview
+This project demonstrates the development of a traffic light controller implemented on an FPGA (e.g., Xilinx Spartan series) with priority override for emergency vehicles. The design employs Hardware Description Languages (Verilog or VHDL) and is verified through simulation using tools such as ModelSim or Vivado.
 
-## Introduction 
-Traffic Light Controller interfacing with Spartan FPGA
-### Traffic Light Controller
-Traffic light controller consists of 12 Nos. point led arranged by 4Lanes. Each lane has Go (Green), Listen(Yellow) and Stop(Red) LED is being placed. Each LED has provided for current limiting resistor to limit the current flows to the LEDs.
+# Functional Description
+## Modes of Operation
+### Normal Mode: Standard timing-based traffic light cycles (Red, Yellow, Green) utilizing a finite state machine (FSM).
 
-Traffic Light Controller interfacing with Spartan6 FPGA kit
+### Priority Mode: Adaptively allocates more green time to approaches with higher vehicle density, based on sensor input.
 
-All the 12 LED’s interfaced with Spartan6 FPGA Development Board
+### Emergency Override: When an emergency vehicle is detected, the system overrides all other cycles, granting a green signal on the relevant path and holding other signals at red.
 
-through series Resister 330 ohm and another end is terminated to ground.
+## System Architecture
+### Component	            Description
+FPGA Board	            Xilinx Spartan series (or similar, e.g., Spartan-3E, Spartan-6)
+Programming Language	Verilog HDL (or VHDL)
+Sensors             	IR, RFID, or manual button input for vehicle presence/emergency detection
+Outputs	                LEDs for red/yellow/green signals; optional 7-segment displays for timers
+Simulation	            ModelSim or Vivado used for functional verification and waveform analysis
+## Design Implementation
+1. FSM (Finite State Machine) Design
+Each traffic signal phase is represented as a state.
 
-### Pin Description for Traffic Light Controller
-Schematics to interface Traffic Light Controller with Spartan6 FPGA
-Traffic Light Controller Placement in Spartan6 FPGA Development Kit
+Transitions are governed by timing intervals and sensor inputs (for density and emergency detection).
 
+Additional ‘emergency’ state overrides standard logic for priority passage.
 
+# 2. Emergency Vehicle Priority Logic
+Detection mechanism: IR, RFID, audio, or manual emergency button.
 
-## VHDL Code for Traffic Light Controller
-    library IEEE;
+On detection, controller immediately grants green to the emergency direction.
 
-    use IEEE.STD_LOGIC_1164.ALL;
-
-    use IEEE.STD_LOGIC_ARITH.ALL;
-
-    use IEEE.STD_LOGIC_UNSIGNED.ALL;
-
- 
-
-    entity traffic_light is
-
-    port ( clk : in std_logic;
-
-       rst : in std_logic;
-
-       northgreen : out std_logic;
-
-               northred   : out std_logic;
-
-               northyel   : out std_logic;
-
-               southgreen : out std_logic;
-
-               southred   : out std_logic;
-
-               southyel   : out std_logic;
-
-               eastgreen  : out std_logic;
-
-               eastred    : out std_logic;
-
-               eastyel    : out std_logic;
-
-               westred    : out std_logic;
-
-               westgreen  : out std_logic;
-
-               westyel    : out std_logic);
-
-    end traffic_light;
-
- 
-
-    architecture Behavioral of traffic_light is
-
-    type contol is (north,south,east,west);
-
-    signal control,control1 : contol := north;
-
-    begin
-
-    process(clk,rst)
-
-    variable i : integer := 0;
-
-    begin
-
-    if rst = '1' then
-
-    if clk'event and clk = '1' then
-
-    if i < 1500000000 then
-
-    i := i + 1;
-
-    elsif i = 1500000000 then
-
-    control <= control1;
-
-    i := 0;
-
-    end if;
-
-    if control = north then
-
-    if i >= 0 and i <= 750000000 then
-
-    northgreen <= '1';
-
-    northred   <= '0';
-
-    northyel   <= '0';
-
-    southgreen <= '0';
-
-    southred   <= '1';
-
-    southyel   <= '0';
-
-    eastgreen  <= '0';
-
-    eastred    <= '1';
-
-    eastyel    <= '0';
-
-    westred    <= '1';
-
-    westgreen  <= '0';
-
-    westyel    <= '0'; 
-
-    elsif i > 750000000 and i <= 1000000000 then
-
-    northgreen <= '0';
-
-    northred   <= '0';
-
-    northyel   <= '1';
- 
-    southgreen <= '0';
-
-    southred   <= '1';
-
-    southyel   <= '0';
-
-    eastgreen  <= '0';
-
-    eastred    <= '1';
-
-    eastyel    <= '0';
-
-    westred    <= '1';
-
-    westgreen  <= '0';
-
-    westyel    <= '0'; 
-
-    elsif i > 1000000000 and i < 1500000000 then
-
-    northgreen <= '0';
-
-    northred   <= '1';
-
-    northyel   <= '0';
-
-    southgreen <= '0';
-
-    southred   <= '1';
-
-    southyel   <= '0';
-
-    eastgreen  <= '1';
-
-    eastred    <= '0';
-
-    eastyel    <= '0';
-
-    westred    <= '1';
-   
-    westgreen  <= '0';
-
-    westyel    <= '0'; 
-
- 
-
-    control1 <= east;
-  
-    end if;
-
-    elsif control = east then
-
- 
-
-    if i >= 0 and i <= 750000000 then
-
-    northgreen <= '0';
-
-    northred   <= '1';
-
-    northyel   <= '0';
-
-    southgreen <= '0';
-
-    southred   <= '1';
-
-    southyel   <= '0';
-
-    eastgreen  <= '1';
-
-    eastred    <= '0';
-
-    eastyel    <= '0';
-
-    westred   <= '1';
-
-    westgreen  <= '0';
-
-    westyel    <= '0'; 
-
-    elsif i > 750000000 and i <= 1000000000 then
-
-    northgreen <= '0';
-
-    northred   <= '1';
-
-    northyel   <= '0';
-
-    southgreen <= '0';
-
-    southred   <= '1';
-
-    southyel   <= '0';
-
-    eastgreen  <= '0';
-
-    eastred    <= '0';
-
-    eastyel    <= '1';
-
-    westred    <= '1';
-
-    westgreen  <= '0';
-
-    westyel    <= '0'; 
-
-    elsif i > 1000000000 and i < 1500000000 then
-
-    northgreen <= '0';
-
-    northred   <= '1';
-
-    northyel   <= '0';
-
-    southgreen <= '1';
-
-    southred   <= '0';
-
-    southyel   <= '0';
-
-    eastgreen  <= '0';
-
-    eastred    <= '1';
-
-    eastyel    <= '0';
-
-    westred    <= '1';
-
-    westgreen  <= '0';
-
-    westyel    <= '0'; 
-
- 
-
- 
-
-    control1 <= south;
-
-    end if;
-
-    elsif control = south then
-
-    if i >= 0 and i <= 750000000 then
-
-    northgreen <= '0';
-
-    northred   <= '1';
-
-    northyel   <= '0';
-
-    southgreen <= '1';
-
-    southred   <= '0';
-
-    southyel   <= '0';
-
-    eastgreen  <= '0';
-
-    eastred    <= '1';
-
-    eastyel    <= '0';
-
-    westred    <= '1';
-
-    westgreen  <= '0';
-
-    westyel    <= '0'; 
-
-    elsif i > 750000000 and i <= 1000000000 then
-
-    northgreen <= '0';
-
-    northred   <= '1';
-
-    northyel   <= '0';
-
-    southgreen <= '0';
-
-    southred   <= '0';
-
-    southyel   <= '1';
-
-    eastgreen  <= '0';
-
-    eastred    <= '1';
-
-    eastyel    <= '0';
-
-    westred    <= '1';
-
-    westgreen  <= '0';
-
-    westyel    <= '0'; 
-
-    elsif i > 1000000000 and i < 1500000000 then
-
-    northgreen <= '0';
-
-    northred   <= '1';
-
-    northyel   <= '0';
-
-    southgreen <= '0';
-
-    southred   <= '1';
-
-    southyel   <= '0';
-
-    eastgreen  <= '0';
-
-    eastred    <= '1';
-
-    eastyel    <= '0';
-
-    westred    <= '0';
-
-    westgreen  <= '1';
-
-    westyel    <= '0'; 
-
- 
-
-    control1 <= west;
-
-    end if;
-
-    elsif control = west then
-
- 
-
-    if i >= 0 and i <= 750000000 then
-
-    northgreen <= '0';
-
-    northred   <= '1';
-
-    northyel   <= '0';
-
-    southgreen <= '0';
-
-    southred   <= '1';
-
-    southyel   <= '0';
-
-    eastgreen  <= '0';
-
-    eastred    <= '1';
-
-    eastyel    <= '0';
-
-    westred    <= '0';
-
-    westgreen  <= '1';
-
-    westyel    <= '0'; 
-
-    elsif i > 750000000 and i <= 1000000000 then
-
-    northgreen <= '0';
-
-    northred   <= '1';
-
-    northyel   <= '0';
-
-    southgreen <= '0';
-
-    southred   <= '1';
-
-    southyel   <= '0';
-
-    eastgreen  <= '0';
-
-    eastred    <= '1';
-
-    eastyel    <= '0';
-
-    westred    <= '0';
-
-    westgreen  <= '0';
-
-    westyel    <= '1'; 
-
-    elsif i > 1000000000 and i < 1500000000 then
-
-    northgreen <= '1';
-
-    northred   <= '0';
-
-    northyel   <= '0';
-
-    southgreen <= '0';
-
-    southred   <= '1';
-
-    southyel   <= '0';
-
-    eastgreen  <= '0';
-
-    eastred    <= '1';
-
-    eastyel    <= '0';
-
-    westred    <= '1';
-
-    westgreen  <= '0';
-
-    westyel    <= '0'; 
-
-   
-
- 
-
-    control1 <= north;
-
-    end if;
-
-    end if;
-
-    end if;
-
-    end if;
-
-    end process;
- 
-    end Behavioral;
-
-    
-
-## TESTBENCH
-
+Other directions hold red until emergency passage confirmed; then the FSM resumes normal operation.
+## Control Algorithm Pseudocode:
 ```
+ if(emergency_detected)
+   state <= EMERGENCY_GREEN; // override cycle
+else if(high_density_lane)
+   state <= PRIORITY_GREEN;  // allocate more green time
+else 
+   state <= NORMAL_CYCLE;
+```
+# 3. Input/Output Mapping
+Inputs: Clocks, reset, sensors (density, emergency).
 
-`timescale 1ns / 1ps
-module Traffic_Light_Controller_TB;
-reg clk,rst;
-wire [2:0]light_M1;
-wire [2:0]light_S;
-wire [2:0]light_MT;
-wire [2:0]light_M2;
-wire [3:0] count;
-wire [2:0]ps;
-Traffic_Light_Controller dut(.clk(clk) , .rst(rst) , .light_M1(light_M1) , .light_S(light_S)  ,.light_M2(light_M2),.light_MT(light_MT)  );
-initial
-begin
-    clk=1'b0;
-    forever #(1000000000/2) clk=~clk;
+Outputs: LEDs for each light, signals to display boards.
+
+# 4. Deployment Flow
+Coding: Write FSM and priority logic in Verilog (or VHDL).
+
+Simulation: Develop testbench and simulate in ModelSim/Vivado.
+
+Synthesis/Implementation: Generate bitstream for Xilinx Spartan, program FPGA.
+
+Testing: Use buttons/sensors as input, LEDs as output.
+
+## Verilog Code Example Snippet
+Below is a simplified snippet of FSM state logic with emergency override:
+```
+always @(posedge clk or posedge reset) begin
+  if (reset) state <= RED;
+  else case(state)
+    RED:     state <= (emergency) ? EMERGENCY_GREEN : GREEN;
+    GREEN:   state <= YELLOW;
+    YELLOW:  state <= RED;
+    EMERGENCY_GREEN: state <= (emergency) ? EMERGENCY_GREEN : RED;
+    default: state <= RED;
+  endcase
 end
-
-initial
-begin
-    rst=0;
-    #1000000000;
-    rst=1;
-    #1000000000;
-    rst=0;
-    #(1000000000*200);
-    $finish;
-end
-endmodule
-
 ```
 
 
+## Simulation and Testing
+Create a Verilog or VHDL testbench modeling normal and emergency scenarios.
 
-  
+Use ModelSim or Vivado simulation for waveform analysis and verification.
+
+Validate by observing signal transitions – on emergency input, green is immediately assigned to the required lane.
+
+## Implementation Notes
+FPGA Board: Ensure correct mapping of LEDs and input switches on the chosen Spartan model.
+
+Flexibility: FSM can be easily modified to add more complex urban intersection logic or handle multiple emergency scenarios.
+
+Scalability: Design allows for future extension (VIP cars, buses, integration with smart city IoT infrastructure).
+
+## References
+The system architecture and emergency priority logic have been demonstrated in research using both Xilinx Spartan FPGAs and alternative platforms, with tested Verilog implementations.
+
+## Key Points:
+
+Priority system: Emergency vehicles are granted green lights with highest priority.
+
+HDL design: FSM-based traffic light logic, coded in Verilog/VHDL.
+
+FPGA implementation: Deployable on common educational/hobbyist FPGAs like Xilinx Spartan.
+
+Simulation ready: Testable in ModelSim or Vivado with standard HDL testbench methodology.
