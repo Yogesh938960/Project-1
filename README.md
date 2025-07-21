@@ -104,16 +104,19 @@ Simulation ready: Testable in ModelSim or Vivado with standard HDL testbench met
 
 
 
-# 5. State Table
+# 5. Logic Diagram
+<img width="1536" height="1024" alt="Logic_Diagram" src="https://github.com/user-attachments/assets/66d68f3b-636c-4bb8-988e-3504419d4c22" />
 
 
-
-# 6. State Direction & Direction Asssignment 
-
-
-
-# 7. State Diagram
+# 6. State Table
+<img width="1145" height="943" alt="State Table" src="https://github.com/user-attachments/assets/9907cf94-7414-4ad3-aa9c-ec59336c2909" />
 
 
+# 7. State Direction & Direction Asssignment 
+<img width="450" height="710" alt="Stata Direction" src="https://github.com/user-attachments/assets/32f070b6-e622-43ae-a196-3d62ffb39dd2" />
+<img width="1152" height="395" alt="Direction Assignment" src="https://github.com/user-attachments/assets/96d41466-5d6f-4075-a1da-8cb610d4c475" />
 
+
+# 8. State Diagram
+<img width="1024" height="1024" alt="State_Diagram" src="https://github.com/user-attachments/assets/94d48d00-b194-47e6-943f-9028b47dcb44" />
 
