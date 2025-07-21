@@ -14,10 +14,6 @@
 4. [TESTBENCH](#testbench)
 5. [Output Waveforms](#output-waveforms)
 6. [Result](#result)
-7. [Future work](#future-work)
-8. [References](#references)
-9. [Author](#author)
-
 
 ## Introduction 
 
