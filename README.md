@@ -427,3 +427,16 @@ additional step for development and choosing the best road for the emergency and
 
 
   
+Traffic Light Controller interfacing with Spartan FPGA Development Kit
+Traffic Light Controller
+Traffic light controller consists of 12 Nos. point led arranged by 4Lanes. Each lane has Go (Green), Listen(Yellow) and Stop(Red) LED is being placed. Each LED has provided for current limiting resistor to limit the current flows to the LEDs.
+
+Traffic Light Controller interfacing with Spartan6 FPGA kit
+
+All the 12 LED’s interfaced with Spartan6 FPGA Development Board
+
+through series Resister 330 ohm and another end is terminated to ground.
+
+ Pin Description for Traffic Light Controller
+Schematics to interface Traffic Light Controller with Spartan6 FPGA
+Traffic Light Controller Placement in Spartan6 FPGA Development Kit
